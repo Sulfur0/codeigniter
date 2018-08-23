@@ -1,0 +1,12 @@
+body { 
+	padding-top: 80px; 
+}
+.space-bot-lg{
+	margin-bottom: 100px;
+}
+.space-bot-md{
+	margin-bottom: 50px;
+}
+.space-bot-sm{
+	margin-bottom: 10px;
+}
