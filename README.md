@@ -1,14 +1,10 @@
 # codeigniter
 Aplicación tutorial para aprender CodeIgniter
 
-
-
 Laura Becerra
-<<<<<<< HEAD:README.md
 Javier Rivas
-=======
 Javiere60
 Ronny Marquez
 Lehandro Paredes
-
->>>>>>> c37278901216a81c6cc483ba69e22902cecacef6:README.md Karla Guillen
+Karla Guillen
+Ricardo Araguache

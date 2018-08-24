@@ -34,7 +34,7 @@ class Persona extends CI_Controller
 			'usr_fec_actualizacion' => date('Y-m-d'),
 		);
 
-		//valido si el usuario ya ha sido registrado.
+		//valido si el usuario ya ha sido registrado...
 		$query = $this->db->get_where('usuario', array('nomUsuario' => $this->input->post("nomUsuario")));
 		if(empty($query->row()))
 		{
