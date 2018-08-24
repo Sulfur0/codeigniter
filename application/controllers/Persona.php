@@ -2,19 +2,19 @@
 /**
  * Controlador de persona necesario para CRUD de atributos a usuarios.
  */
-class PersonaController extends CI_Controller
+class Persona extends CI_Controller
 {
 	
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Persona');
+		$this->load->model('MPersona');
 		$this->load->model('MUsuario');
 		$this->load->library('encrypt');
 		$this->load->helper('url');
 	}
 	public function index(){
-		$this->load->view('persona/register');
+		$this->load->view('register/register');
 	}
 	public function guardar(){
 		
@@ -38,12 +38,12 @@ class PersonaController extends CI_Controller
 		$query = $this->db->get_where('usuario', array('nomUsuario' => $this->input->post("nomUsuario")));
 		if(empty($query->row()))
 		{
-			$idPersona = $this->Persona->guardar($paramPersona);
+			$idPersona = $this->MPersona->guardar($paramPersona);
 			$paramUsuario["idPersona"] = $idPersona;
 			if($this->MUsuario->guardar($paramUsuario))
 			{
 				$datos = array('response' => 'Se ha registrado el usuario correctamente.');	
-				$this->load->view('persona/login',$datos);					
+				$this->load->view('auth/login',$datos);					
 			}
 			else
 			{
@@ -53,8 +53,8 @@ class PersonaController extends CI_Controller
 		}
 		else
 		{
-			$datos = array('errors' => 'El usuario '.$this->input->post("nomUsuario").' ya ha sido registrado.');
-			$this->load->view('persona/register',$datos);	
+			$datos = array('errors' => 'El usuario '.$this->input->post("nomUsuario").' ya está registrado.');
+			$this->load->view('register/register',$datos);	
 		}	
 	}
 }
