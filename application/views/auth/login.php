@@ -33,7 +33,7 @@
 			</div>			
 		<?php } ?>
 		<div class="w3-agileits-info">			
-			<form class='form animate-form' id='form1' action="<?php echo base_url(); ?>index.php/authController/ingresar" method="POST">
+			<form class='form animate-form' id='form1' action="<?php echo base_url(); ?>index.php/Auth/ingresar" method="POST">
 				<p class="w3agileits">Login</p>
 				<div class='form-group has-feedback w3ls'>
 					<label class='control-label sr-only' for='username'>Nombre de Usuario</label> 
@@ -54,7 +54,7 @@
 					<input class='btn btn-lg' type='submit' value='Entrar'>
 				</div>
 				<div class="form-group has-feedback w3ls">
-					<p>No estas registrado? Registrate <a href="<?php echo base_url(); ?>index.php/personaController">aquí</a></p>
+					<p>No estas registrado? Registrate <a href="<?php echo base_url(); ?>index.php/Persona">aquí</a></p>
 				</div>
 			</form>
 		</div>	

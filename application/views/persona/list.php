@@ -9,7 +9,7 @@
 <body>	
 	<div class="row">
 		<div class="offset-md-8 col-md-4 col-sm-12">
-			<a class="btn btn-warning" href="<?php echo base_url(); ?>index.php/authController/logout">Cerrar Sesión</a>
+			<a class="btn btn-warning" href="<?php echo base_url(); ?>index.php/Auth/logout">Cerrar Sesión</a>
 		</div>
 	</div>
 	
