@@ -10,3 +10,4 @@ Lista de commits
 5. Arreglo de errores en login, mensajes de errores en login y de éxito al registrar.
 6. Arreglos de estilos, Boton de cerrar sesión, filtros requeridos en los formularios, arreglado bug de registro de usuarios ya registrados.
 7. Actualizado el readme.
+
