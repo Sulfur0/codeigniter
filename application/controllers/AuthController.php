@@ -13,7 +13,7 @@ class AuthController extends CI_Controller
 	}
 
 	public function index(){
-		$this->load->view('persona/login');
+		$this->load->view('auth/login');
 	}
 
 	public function ingresar(){
@@ -33,14 +33,14 @@ class AuthController extends CI_Controller
 		else
 		{
 			$datos = array('errors' => 'El usuario o la contraseña es incorrecta');
-			$this->load->view('persona/login',$datos);
+			$this->load->view('auth/login',$datos);
 		}
 	}
 
 	public function logout(){
 		session_start();
 		session_destroy();				
-		$this->load->view('persona/login');
+		$this->load->view('auth/login');
 	}
 }
 ?>

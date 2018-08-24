@@ -14,7 +14,7 @@ class PersonaController extends CI_Controller
 		$this->load->helper('url');
 	}
 	public function index(){
-		$this->load->view('persona/register');
+		$this->load->view('register/register');
 	}
 	public function guardar(){
 		
@@ -43,7 +43,7 @@ class PersonaController extends CI_Controller
 			if($this->MUsuario->guardar($paramUsuario))
 			{
 				$datos = array('response' => 'Se ha registrado el usuario correctamente.');	
-				$this->load->view('persona/login',$datos);					
+				$this->load->view('auth/login',$datos);					
 			}
 			else
 			{
@@ -53,8 +53,8 @@ class PersonaController extends CI_Controller
 		}
 		else
 		{
-			$datos = array('errors' => 'El usuario '.$this->input->post("nomUsuario").' ya ha sido registrado.');
-			$this->load->view('persona/register',$datos);	
+			$datos = array('errors' => 'El usuario '.$this->input->post("nomUsuario").' ya está registrado.');
+			$this->load->view('register/register',$datos);	
 		}	
 	}
 }
