@@ -1,10 +1,20 @@
-# codeigniter
+# CodeIgniter
+
 Aplicación tutorial para aprender CodeIgniter
 
-Laura Becerra
-Javier Rivas
-Javiere60
-Ronny Marquez
-Lehandro Paredes
-Karla Guillen
-Ricardo Araguache
+# Participantes
+
+  - Laura Becerra
+  - Javier Rivas
+  - Javiere60
+  - Ronny Marquez
+  - Lehandro Paredes
+  - Karla Guillen
+  - Ricardo Araguache
+  - Andrés Vega
+
+
+
+
+
+
