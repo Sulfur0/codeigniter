@@ -33,7 +33,7 @@
 			</div>			
 		<?php } ?>
 		<div class="register-form">			
-			<form action="<?php echo base_url(); ?>index.php/PersonaController/guardar" class='form animate-form' id='form1'  method="POST">			<p class="w3agileits">Registro de Usuario</p>
+			<form action="<?php echo base_url(); ?>index.php/Persona/guardar" class='form animate-form' id='form1'  method="POST">			<p class="w3agileits">Registro de Usuario</p>
 				<div class='form-group has-feedback w3ls'>
 					<label class='control-label sr-only' for='nombre'>Nombre</label> 
 					<input class='form-control' id='nombre' name='nombre' placeholder='Nombre' type='text'>
@@ -77,7 +77,7 @@
 					<input class='btn btn-lg' type='submit' value='Registrar'>
 				</div>
 				<div class="form-group has-feedback w3ls">
-					<p>Ya estas registrado? Entra <a href="<?php echo base_url(); ?>index.php/authController">aquí</a></p>
+					<p>Ya estas registrado? Entra <a href="<?php echo base_url(); ?>index.php/Auth">aquí</a></p>
 				</div>
 			</form>
 		</div>	

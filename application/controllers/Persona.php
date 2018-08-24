@@ -2,13 +2,13 @@
 /**
  * Controlador de persona necesario para CRUD de atributos a usuarios.
  */
-class PersonaController extends CI_Controller
+class Persona extends CI_Controller
 {
 	
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Persona');
+		$this->load->model('MPersona');
 		$this->load->model('MUsuario');
 		$this->load->library('encrypt');
 		$this->load->helper('url');
@@ -38,7 +38,7 @@ class PersonaController extends CI_Controller
 		$query = $this->db->get_where('usuario', array('nomUsuario' => $this->input->post("nomUsuario")));
 		if(empty($query->row()))
 		{
-			$idPersona = $this->Persona->guardar($paramPersona);
+			$idPersona = $this->MPersona->guardar($paramPersona);
 			$paramUsuario["idPersona"] = $idPersona;
 			if($this->MUsuario->guardar($paramUsuario))
 			{
