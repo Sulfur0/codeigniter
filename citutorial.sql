@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 23, 2018 at 02:43 PM
+-- Generation Time: Aug 26, 2018 at 02:02 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -21,69 +21,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `citutorial` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `citutorial`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cliente`
---
-
-CREATE TABLE `cliente` (
-  `cli_id` int(11) NOT NULL,
-  `cli_id_persona` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `compania`
---
-
-CREATE TABLE `compania` (
-  `com_codigo` int(11) NOT NULL,
-  `com_nombre` varchar(45) NOT NULL,
-  `com_cantidad_trabajadores` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `compras`
---
-
-CREATE TABLE `compras` (
-  `comp_codigo` varchar(50) NOT NULL,
-  `comp_item` int(11) NOT NULL,
-  `comp_cantidad` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `inventario`
---
-
-CREATE TABLE `inventario` (
-  `inv_codigo` varchar(45) NOT NULL,
-  `inv_item` varchar(45) NOT NULL,
-  `inv_cantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `parametros`
---
-
-CREATE TABLE `parametros` (
-  `param_codigo` int(11) NOT NULL,
-  `param_nombre` varchar(45) NOT NULL,
-  `param_unidad` varchar(45) NOT NULL,
-  `param_precio_compra` varchar(45) NOT NULL,
-  `param_creado_por` int(11) NOT NULL,
-  `param_fecha_creacion` date DEFAULT NULL,
-  `param_fecha_actualizacion` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -111,17 +48,6 @@ INSERT INTO `persona` (`idPersona`, `nombre`, `appaterno`, `apmaterno`, `email`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `proveedor`
---
-
-CREATE TABLE `proveedor` (
-  `prov_id` int(11) NOT NULL,
-  `prov_id_persona` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `usuario`
 --
 
@@ -142,67 +68,15 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idUsuario`, `nomUsuario`, `clave`, `idPersona`, `privilegio`, `usr_fec_creacion`, `usr_fec_actualizacion`) VALUES
 (4, 'Andres', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 11, 'user', '2018-08-18', '2018-08-18');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `ventas`
---
-
-CREATE TABLE `ventas` (
-  `vent_codigo` varchar(50) NOT NULL,
-  `vent_item` int(11) NOT NULL,
-  `vent_cantidad` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `cliente`
---
-ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`cli_id`),
-  ADD KEY `fk_cliente_1_idx` (`cli_id_persona`);
-
---
--- Indexes for table `compania`
---
-ALTER TABLE `compania`
-  ADD PRIMARY KEY (`com_codigo`);
-
---
--- Indexes for table `compras`
---
-ALTER TABLE `compras`
-  ADD PRIMARY KEY (`comp_codigo`),
-  ADD KEY `fk_compras_2_idx` (`comp_item`);
-
---
--- Indexes for table `inventario`
---
-ALTER TABLE `inventario`
-  ADD PRIMARY KEY (`inv_codigo`);
-
---
--- Indexes for table `parametros`
---
-ALTER TABLE `parametros`
-  ADD PRIMARY KEY (`param_codigo`),
-  ADD UNIQUE KEY `param_creado_por_UNIQUE` (`param_creado_por`);
 
 --
 -- Indexes for table `persona`
 --
 ALTER TABLE `persona`
   ADD PRIMARY KEY (`idPersona`);
-
---
--- Indexes for table `proveedor`
---
-ALTER TABLE `proveedor`
-  ADD PRIMARY KEY (`prov_id`),
-  ADD KEY `fk_proveedor_1_idx` (`prov_id_persona`);
 
 --
 -- Indexes for table `usuario`
@@ -212,26 +86,9 @@ ALTER TABLE `usuario`
   ADD UNIQUE KEY `idPersona` (`idPersona`);
 
 --
--- Indexes for table `ventas`
---
-ALTER TABLE `ventas`
-  ADD PRIMARY KEY (`vent_codigo`),
-  ADD KEY `fk_ventas_2_idx` (`vent_item`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `compania`
---
-ALTER TABLE `compania`
-  MODIFY `com_codigo` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `parametros`
---
-ALTER TABLE `parametros`
-  MODIFY `param_codigo` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `persona`
 --
@@ -247,42 +104,10 @@ ALTER TABLE `usuario`
 --
 
 --
--- Constraints for table `cliente`
---
-ALTER TABLE `cliente`
-  ADD CONSTRAINT `fk_cliente_1` FOREIGN KEY (`cli_id_persona`) REFERENCES `persona` (`idPersona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `compras`
---
-ALTER TABLE `compras`
-  ADD CONSTRAINT `fk_compras_1` FOREIGN KEY (`comp_codigo`) REFERENCES `inventario` (`inv_codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_compras_2` FOREIGN KEY (`comp_item`) REFERENCES `parametros` (`param_codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Constraints for table `parametros`
---
-ALTER TABLE `parametros`
-  ADD CONSTRAINT `ibkf_1` FOREIGN KEY (`param_creado_por`) REFERENCES `usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `proveedor`
---
-ALTER TABLE `proveedor`
-  ADD CONSTRAINT `fk_proveedor_1` FOREIGN KEY (`prov_id_persona`) REFERENCES `persona` (`idPersona`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
 -- Constraints for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`);
-
---
--- Constraints for table `ventas`
---
-ALTER TABLE `ventas`
-  ADD CONSTRAINT `fk_ventas_1` FOREIGN KEY (`vent_codigo`) REFERENCES `inventario` (`inv_codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_ventas_2` FOREIGN KEY (`vent_item`) REFERENCES `parametros` (`param_codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
