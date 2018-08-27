@@ -11,7 +11,7 @@ class Auth extends CI_Controller
 		$this->load->model('MUsuario');
 		$this->load->helper('url');
 		$this->load->library('session');
-		if(!$this->session->userdata('user')) header('location: '.base_url());
+		
 	}
 
 	public function index(){
@@ -43,6 +43,7 @@ class Auth extends CI_Controller
 	}
 
 	public function logout(){
+		if(!$this->session->userdata('user')) header('location: '.base_url());
 		//session_start();
 		session_destroy();				
 		$this->load->view('auth/login');

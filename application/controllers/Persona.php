@@ -12,12 +12,21 @@ class Persona extends CI_Controller
 		$this->load->model('MUsuario');
 		$this->load->library('encrypt');
 		$this->load->helper('url');
+		$this->load->library('session');
+
 	}
+	/*
+	* Método para el mostrar el formulario de registro de usuarios
+	*
+	*/
 	public function index(){
 		$this->load->view('register/register');
 	}
-	public function guardar(){
-		session_start();
+	/*
+	* Método para el registro de usuarios
+	*
+	*/
+	public function guardar(){		
 		$paramPersona = array(
 			'nombre' => $this->input->post("nombre"), 
 			'appaterno' => $this->input->post("appaterno"), 
@@ -57,13 +66,83 @@ class Persona extends CI_Controller
 			$this->load->view('register/register',$datos);	
 		}	
 	}	
+	/*
+	* Método para mostrar una lista con todos los usuarios
+	*
+	*/
 	public function list()
 	{
+		if(!$this->session->userdata('user')) header('location: '.base_url());
 		$data['usuarios'] = $this->MUsuario->get_users();		
-		$this->load->view('layouts/top',$data);
+		$this->load->view('layouts/top');
 		$this->load->view('persona/list', $data);
 		$this->load->view('layouts/bottom');	
 
+	}
+	/*
+	* @Description: Método para mostrar el formulario de edición de usuarios
+	* @Params $id -> id del usuario a modificar
+	* @return Response
+	*/
+	public function edit($id)
+	{
+		if(!$this->session->userdata('user')) header('location: '.base_url());
+		
+		$item = $this->MUsuario->get_users($id);
+
+       	$this->load->view('layouts/top');
+       	$this->load->view('persona/edit',array('item'=>$item));
+       	$this->load->view('layouts/bottom');
+	}
+	/*
+	* Método para guardar la edición de los usuarios
+	*
+	*/
+	public function update($id)
+	{
+		if(!$this->session->userdata('user')) header('location: '.base_url());
+
+		$query = $this->db->get_where(
+			'usuario', array(
+				'nomUsuario' => $this->input->post('nomUsuario'), 
+				'clave' => sha1($this->input->post('viejaclave'))
+			)
+		);
+		if($query->row_array())
+		{
+			$this->MUsuario->update($id);
+			$datos = array('response' => 'El usuario se ha actualizado correctamente.');	
+			$data['usuarios'] = $this->MUsuario->get_users();
+			$this->load->view('layouts/top');
+	       	$this->load->view('persona/list', $data,$datos);
+	       	$this->load->view('layouts/bottom');
+		}
+		else
+		{
+			$item = $this->MUsuario->get_users($id);
+			$datos = array('error' => 'La contraseña anterior no coincide.');
+			$this->load->view('layouts/top');
+	       	$this->load->view('persona/edit',array('item'=>$item),$datos);
+	       	$this->load->view('layouts/bottom');
+		}
+	}
+	/*
+	* Método para guardar la edición de los usuarios
+	*
+	*/
+	public function delete($id)
+	{
+		/*
+		se puede eliminar un usuario pero deberia poder seguir existiendo como persona bajo la base de datos
+		*/
+		if(!$this->session->userdata('user')) header('location: '.base_url());
+		$item = $this->MUsuario->delete($id);
+
+		$data['usuarios'] = $this->MUsuario->get_users();
+		
+		$this->load->view('layouts/top');
+		$this->load->view('persona/list', $data);
+		$this->load->view('layouts/bottom');
 	}
 }
 ?>
