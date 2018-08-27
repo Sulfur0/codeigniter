@@ -31,5 +31,16 @@ class MUsuario extends CI_Model
 			return 0;
 		}
 	}
+	public function get_users($usuarioid = FALSE)
+	{
+		$this->db->join('persona', 'usuario.idPersona = persona.idPersona', 'left');
+	    if ($usuarioid === FALSE)
+	    {
+	        $query = $this->db->get('usuario');
+	        return $query->result_array();
+	    }
+		$query = $this->db->get_where('usuario', array('usuario.idUsuario' => $usuarioid));
+	    return $query->row_array();
+	}
 }
  ?>

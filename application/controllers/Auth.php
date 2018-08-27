@@ -10,10 +10,12 @@ class Auth extends CI_Controller
 		parent::__construct();
 		$this->load->model('MUsuario');
 		$this->load->helper('url');
+		$this->load->library('session');
+		if(!$this->session->userdata('user')) header('location: '.base_url());
 	}
 
 	public function index(){
-		$this->load->view('auth/login');
+		$this->load->view('auth/login');		
 	}
 
 	public function ingresar(){
@@ -22,13 +24,16 @@ class Auth extends CI_Controller
 
 		$result = $this->MUsuario->ingresar($usuario,$clave);
 		if($result)
-		{
-			
-			session_start();
-			$_SESSION['user'] = $result->idUsuario;			
-			$this->load->view('persona/list',$result);
-			
-			//print_r($result);
+		{			
+			//session_start();
+			$_SESSION['user'] = $result->idUsuario;
+			$this->db->join('persona', 'usuario.idPersona = persona.idPersona', 'left');
+			$query = $this->db->get_where('usuario', array('usuario.idUsuario' => $result->idUsuario));
+			$user = $query->row_array();
+			$_SESSION['nombre_usuario'] = $user["nombre"]." ".$user["appaterno"];
+			$_SESSION['correo_electronico'] = $user["email"];
+			$this->load->view('layouts/top',$result);
+			$this->load->view('layouts/bottom');			
 		}
 		else
 		{
@@ -38,7 +43,7 @@ class Auth extends CI_Controller
 	}
 
 	public function logout(){
-		session_start();
+		//session_start();
 		session_destroy();				
 		$this->load->view('auth/login');
 	}

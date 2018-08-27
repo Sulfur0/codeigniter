@@ -17,7 +17,7 @@ class Persona extends CI_Controller
 		$this->load->view('register/register');
 	}
 	public function guardar(){
-		
+		session_start();
 		$paramPersona = array(
 			'nombre' => $this->input->post("nombre"), 
 			'appaterno' => $this->input->post("appaterno"), 
@@ -56,6 +56,14 @@ class Persona extends CI_Controller
 			$datos = array('errors' => 'El usuario '.$this->input->post("nomUsuario").' ya está registrado.');
 			$this->load->view('register/register',$datos);	
 		}	
+	}	
+	public function list()
+	{
+		$data['usuarios'] = $this->MUsuario->get_users();		
+		$this->load->view('layouts/top',$data);
+		$this->load->view('persona/list', $data);
+		$this->load->view('layouts/bottom');	
+
 	}
 }
 ?>

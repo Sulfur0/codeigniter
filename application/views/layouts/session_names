@@ -1,0 +1,4 @@
+<div class="profile-r align-self-center">
+                                        <h3 class="sub-title-w3-agileits"><?php echo $_SESSION['nombre_usuario']; ?></h3>
+                                        <a href="mailto:<?php echo $_SESSION['correo_electronico']; ?>"><?php echo $_SESSION['correo_electronico']; ?></a>
+                                    </div>
