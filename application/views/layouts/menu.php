@@ -28,21 +28,6 @@
                             <a href="<?php echo base_url(); ?>index.php/Persona/list">Lista de Usuarios</a>
                         </li>
                     </ul>
-                </li> 
-                <li>
-                    <a href="#ajustesSubmenu" data-toggle="collapse" aria-expanded="false">
-                        <i class="fas fa-cog"></i>
-                        Ajustes
-                        <i class="fas fa-angle-down fa-pull-right"></i>
-                    </a>
-                    <ul class="collapse list-unstyled" id="ajustesSubmenu">
-                        <li>
-                            <a href="#">Ajustes de Compañía</a>
-                        </li>
-                        <li>
-                            <a href="#">Ajustes de Sucursal</a>
-                        </li>
-                    </ul>
                 </li>                              
             </ul>
         </nav>
