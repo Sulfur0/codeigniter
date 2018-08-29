@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 27, 2018 at 10:35 PM
+-- Generation Time: Aug 29, 2018 at 06:21 PM
 -- Server version: 5.7.23-0ubuntu0.16.04.1
 -- PHP Version: 7.0.30-0ubuntu0.16.04.1
 
@@ -53,7 +53,8 @@ CREATE TABLE `compania` (
 CREATE TABLE `compras` (
   `comp_id` int(11) NOT NULL,
   `comp_proveedor` int(11) NOT NULL,
-  `op_id` int(11) NOT NULL
+  `op_id` int(11) NOT NULL,
+  `comp_fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -63,8 +64,37 @@ CREATE TABLE `compras` (
 --
 
 CREATE TABLE `inventario` (
+  `inv_id` int(11) NOT NULL,
+  `itm_codigo` int(11) NOT NULL,
+  `inv_existencia` int(11) NOT NULL,
+  `inv_actualizacion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `items`
+--
+
+CREATE TABLE `items` (
+  `itm_codigo` int(11) NOT NULL,
+  `itm_nombre` varchar(45) NOT NULL,
+  `itm_unidad` varchar(45) NOT NULL,
+  `itm_precio_compra` float NOT NULL,
+  `itm_creado_por` int(11) NOT NULL,
+  `itm_fecha_creacion` date NOT NULL,
+  `itm_fecha_actualizacion` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kardex`
+--
+
+CREATE TABLE `kardex` (
   `inv_codigo` int(11) NOT NULL,
-  `inv_item` varchar(45) NOT NULL,
+  `itm_codigo` int(11) NOT NULL,
   `inv_cantidad` int(11) NOT NULL,
   `inv_operacion_id` int(11) NOT NULL,
   `inv_tipo_operacion` varchar(10) NOT NULL
@@ -77,9 +107,9 @@ CREATE TABLE `inventario` (
 --
 
 CREATE TABLE `listafactura` (
-  `item_id` int(11) NOT NULL,
-  `param_codigo` int(11) NOT NULL,
-  `item_cantidad` int(11) NOT NULL,
+  `list_id` int(11) NOT NULL,
+  `itm_codigo` int(11) NOT NULL,
+  `list_cantidad` int(11) NOT NULL,
   `op_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -90,23 +120,8 @@ CREATE TABLE `listafactura` (
 --
 
 CREATE TABLE `operacion` (
-  `op_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `parametros`
---
-
-CREATE TABLE `parametros` (
-  `param_codigo` int(11) NOT NULL,
-  `param_nombre` varchar(45) NOT NULL,
-  `param_unidad` varchar(45) NOT NULL,
-  `param_precio_compra` varchar(45) NOT NULL,
-  `param_creado_por` int(11) NOT NULL,
-  `param_fecha_creacion` date NOT NULL,
-  `param_fecha_actualizacion` date NOT NULL
+  `op_id` int(11) NOT NULL,
+  `op_comentario` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -189,7 +204,8 @@ INSERT INTO `usuario` (`idUsuario`, `nomUsuario`, `clave`, `idPersona`, `privile
 CREATE TABLE `ventas` (
   `vent_codigo` int(11) NOT NULL,
   `vent_cliente` int(11) NOT NULL,
-  `op_id` int(11) NOT NULL
+  `op_id` int(11) NOT NULL,
+  `vent_fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -221,27 +237,37 @@ ALTER TABLE `compras`
 -- Indexes for table `inventario`
 --
 ALTER TABLE `inventario`
-  ADD PRIMARY KEY (`inv_codigo`);
+  ADD PRIMARY KEY (`inv_id`),
+  ADD KEY `itm_codigo` (`itm_codigo`);
+
+--
+-- Indexes for table `items`
+--
+ALTER TABLE `items`
+  ADD PRIMARY KEY (`itm_codigo`),
+  ADD KEY `param_creado_por` (`itm_creado_por`);
+
+--
+-- Indexes for table `kardex`
+--
+ALTER TABLE `kardex`
+  ADD PRIMARY KEY (`inv_codigo`),
+  ADD KEY `inv_operacion_id` (`inv_operacion_id`),
+  ADD KEY `itm_codigo` (`itm_codigo`);
 
 --
 -- Indexes for table `listafactura`
 --
 ALTER TABLE `listafactura`
-  ADD PRIMARY KEY (`item_id`),
+  ADD PRIMARY KEY (`list_id`),
   ADD KEY `listafactura_ibfk_1` (`op_id`),
-  ADD KEY `param_codigo` (`param_codigo`);
+  ADD KEY `param_codigo` (`itm_codigo`);
 
 --
 -- Indexes for table `operacion`
 --
 ALTER TABLE `operacion`
   ADD PRIMARY KEY (`op_id`);
-
---
--- Indexes for table `parametros`
---
-ALTER TABLE `parametros`
-  ADD PRIMARY KEY (`param_codigo`);
 
 --
 -- Indexes for table `persona`
@@ -301,22 +327,27 @@ ALTER TABLE `compras`
 -- AUTO_INCREMENT for table `inventario`
 --
 ALTER TABLE `inventario`
+  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `items`
+--
+ALTER TABLE `items`
+  MODIFY `itm_codigo` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `kardex`
+--
+ALTER TABLE `kardex`
   MODIFY `inv_codigo` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `listafactura`
 --
 ALTER TABLE `listafactura`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `list_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `operacion`
 --
 ALTER TABLE `operacion`
   MODIFY `op_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `parametros`
---
-ALTER TABLE `parametros`
-  MODIFY `param_codigo` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `persona`
 --
@@ -360,11 +391,30 @@ ALTER TABLE `compras`
   ADD CONSTRAINT `compras_ibfk_2` FOREIGN KEY (`comp_proveedor`) REFERENCES `proveedor` (`prov_id`);
 
 --
+-- Constraints for table `inventario`
+--
+ALTER TABLE `inventario`
+  ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`itm_codigo`) REFERENCES `items` (`itm_codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `items`
+--
+ALTER TABLE `items`
+  ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`itm_creado_por`) REFERENCES `usuario` (`idUsuario`);
+
+--
+-- Constraints for table `kardex`
+--
+ALTER TABLE `kardex`
+  ADD CONSTRAINT `kardex_ibfk_1` FOREIGN KEY (`inv_operacion_id`) REFERENCES `operacion` (`op_id`),
+  ADD CONSTRAINT `kardex_ibfk_2` FOREIGN KEY (`itm_codigo`) REFERENCES `items` (`itm_codigo`);
+
+--
 -- Constraints for table `listafactura`
 --
 ALTER TABLE `listafactura`
   ADD CONSTRAINT `listafactura_ibfk_1` FOREIGN KEY (`op_id`) REFERENCES `operacion` (`op_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `listafactura_ibfk_2` FOREIGN KEY (`param_codigo`) REFERENCES `parametros` (`param_codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `listafactura_ibfk_2` FOREIGN KEY (`itm_codigo`) REFERENCES `items` (`itm_codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `proveedor`
@@ -382,8 +432,7 @@ ALTER TABLE `sucursal`
 -- Constraints for table `usuario`
 --
 ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`),
-  ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idPersona`) REFERENCES `persona` (`idPersona`);
 
 --
 -- Constraints for table `ventas`
