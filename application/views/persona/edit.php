@@ -12,7 +12,7 @@
 		<div class="alert alert-danger">
 			<p><b><?php echo $errors;?></b></p>
 		</div>
-	</div>			
+	</div>
 <?php } ?>
 <div class="form-body-w3-agile text-center w-lg-50 w-sm-75 w-100 mx-auto mt-5">
 	<form action="<?php echo base_url(); ?>index.php/Persona/update/<?php echo $item["idUsuario"]; ?>" method="post">

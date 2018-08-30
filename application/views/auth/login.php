@@ -54,7 +54,7 @@
 					<input class='btn btn-lg' type='submit' value='Entrar'>
 				</div>
 				<div class="form-group has-feedback w3ls">
-					<p>No estas registrado? Registrate <a href="<?php echo base_url(); ?>index.php/Persona">aquí</a></p>
+					<p>No estas registrado? Registrate <a href="<?php echo base_url(); ?>index.php/Persona/create">aquí</a></p>
 				</div>
 			</form>
 		</div>	

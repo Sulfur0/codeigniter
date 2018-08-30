@@ -10,13 +10,6 @@ class MUsuario extends CI_Model
 		parent::__construct();
 		$this->load->library('encrypt');
 	}
-	public function guardar($paramUsuario){
-		if($this->db->insert("usuario",$paramUsuario))
-			return true;
-		else
-			return false;
-	}
-
 	public function ingresar($usuario,$clave){
 		$claveEncrypt = sha1($clave);
 		
@@ -31,6 +24,15 @@ class MUsuario extends CI_Model
 			return 0;
 		}
 	}
+	
+	public function guardar($paramUsuario){
+		if($this->db->insert("usuario",$paramUsuario))
+			return true;
+		else
+			return false;
+	}
+
+	
 	public function get_users($usuarioid = FALSE)
 	{
 		$this->db->join('persona', 'usuario.idPersona = persona.idPersona', 'left');

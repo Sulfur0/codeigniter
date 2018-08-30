@@ -13,13 +13,21 @@ class Persona extends CI_Controller
 		$this->load->library('encrypt');
 		$this->load->helper('url');
 		$this->load->library('session');
-
+	}
+	/*
+	* Método index, para mostrar una pagina de inicio
+	*
+	*/
+	public function index(){
+		$this->load->view('layouts/top');
+		$this->load->view('persona/home');
+		$this->load->view('layouts/bottom');
 	}
 	/*
 	* Método para el mostrar el formulario de registro de usuarios
 	*
 	*/
-	public function index(){
+	public function create(){
 		$this->load->view('register/register');
 	}
 	/*
@@ -50,9 +58,19 @@ class Persona extends CI_Controller
 			$idPersona = $this->MPersona->guardar($paramPersona);
 			$paramUsuario["idPersona"] = $idPersona;
 			if($this->MUsuario->guardar($paramUsuario))
-			{
-				$datos = array('response' => 'Se ha registrado el usuario correctamente.');	
-				$this->load->view('auth/login',$datos);					
+			{				
+				$data['usuarios'] = $this->MUsuario->get_users();
+				$data['response'] = 'Se ha registrado el usuario correctamente.';
+				if(!$this->session->userdata('user'))
+				{
+					$this->load->view('layouts/top');
+					$this->load->view('persona/list', $data);
+					$this->load->view('layouts/bottom');
+				}
+				else
+					$this->load->view('auth/login',$data);
+					
+						
 			}
 			else
 			{
@@ -111,23 +129,23 @@ class Persona extends CI_Controller
 		if($query->row_array())
 		{
 			$this->MUsuario->update($id);
-			$datos = array('response' => 'El usuario se ha actualizado correctamente.');	
 			$data['usuarios'] = $this->MUsuario->get_users();
+			$data['response'] = 'El usuario se ha actualizado correctamente.';
 			$this->load->view('layouts/top');
-	       	$this->load->view('persona/list', $data,$datos);
+	       	$this->load->view('persona/list', $data);
 	       	$this->load->view('layouts/bottom');
 		}
 		else
 		{
-			$item = $this->MUsuario->get_users($id);
-			$datos = array('error' => 'La contraseña anterior no coincide.');
+			$data['item'] = $this->MUsuario->get_users($id);
+			$data['error'] = 'La contraseña anterior no coincide.';
 			$this->load->view('layouts/top');
-	       	$this->load->view('persona/edit',array('item'=>$item),$datos);
+	       	$this->load->view('persona/edit',$data);
 	       	$this->load->view('layouts/bottom');
 		}
 	}
 	/*
-	* Método para guardar la edición de los usuarios
+	* Metodo para eliminar un usuario
 	*
 	*/
 	public function delete($id)
@@ -137,7 +155,7 @@ class Persona extends CI_Controller
 		*/
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 		$item = $this->MUsuario->delete($id);
-
+		$data['response'] = 'Usuario eliminado correctamente.';
 		$data['usuarios'] = $this->MUsuario->get_users();
 		
 		$this->load->view('layouts/top');

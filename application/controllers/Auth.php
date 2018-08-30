@@ -33,6 +33,7 @@ class Auth extends CI_Controller
 			$_SESSION['nombre_usuario'] = $user["nombre"]." ".$user["appaterno"];
 			$_SESSION['correo_electronico'] = $user["email"];
 			$this->load->view('layouts/top',$result);
+			$this->load->view('persona/home');
 			$this->load->view('layouts/bottom');			
 		}
 		else
