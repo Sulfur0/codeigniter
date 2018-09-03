@@ -88,7 +88,7 @@ class Persona extends CI_Controller
 	* Método para mostrar una lista con todos los usuarios
 	*
 	*/
-	public function list()
+	public function listar()
 	{
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 		$data['usuarios'] = $this->MUsuario->get_users();		
