@@ -36,7 +36,8 @@ class Ventas extends CI_Controller
 	*/
 	public function guardar(){		
 		$paramVentas = array(
-			'vent_fecha' => $this->input->post("vent_fecha")			
+			'vent_fecha' => $this->input->post("vent_fecha")
+			'cli_id' => $this->input->post("cli_id")			
 		);
 		$paramOperacion = array(
 			'op_comentario' => $this->input->post("op_comentario"),
@@ -49,11 +50,17 @@ class Ventas extends CI_Controller
 		if(empty($query->row()))
 		*/
 		
+
+
+
+
+		 /* esta line siguiente dweclaramo la clave foranea entre ambas tablas, primero en donde es la llave primaria que es en la tabla operacion, por eso guardamos en parmoperacion*/
 			$op_id = $this->MVentas->guardarOperacion($paramOperacion);
-			$paramOperacion["op_id"] = $op_id;
+			/* aqi ahora declaramos que en paramventas ese id operacion es igual a la variable declarada en la linea anterior, para que ahora tambien s enos guarde en la otra tabla*/
+			$paramVentas["op_id"] = $op_id;
 			if($this->MVentas->guardarVentas($paramVentas))
 			{				
-				$data['operaciones'] = $this->MVentas->get_users();
+				$data['operaciones'] = $this->MVentas->get_ventas();
 				$data['response'] = 'La operacion se ha registrado correctamente.';
 				if(!$this->session->userdata('user'))
 				{
@@ -92,7 +99,7 @@ class Ventas extends CI_Controller
 	public function listar()
 	{
 		if(!$this->session->userdata('user')) header('location: '.base_url());
-		$data['operaciones'] = $this->MVentas->get_users();		
+		$data['operaciones'] = $this->MVentas->get_ventas();		
 		$this->load->view('layouts/top');
 		$this->load->view('ventas/listventas', $data);
 		$this->load->view('layouts/bottom');	
