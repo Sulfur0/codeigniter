@@ -44,21 +44,24 @@ class Ventas extends CI_Controller
 		);
 
 		//valido si el usuario ya ha sido registrado...
+		 /* no lo necesitamos pors los momentos
 		$query = $this->db->get_where('operacion', array('op_comentario' => $this->input->post("op_comentario")));
 		if(empty($query->row()))
-		{
-			$op_id = $this->MVentas->guardar($paramVentas);
+		*/
+		
+			$op_id = $this->MVentas->guardarOperacion($paramOperacion);
 			$paramOperacion["op_id"] = $op_id;
-			if($this->MVentas->guardar($paramOperacion))
+			if($this->MVentas->guardarVentas($paramVentas))
 			{				
 				$data['operaciones'] = $this->MVentas->get_users();
-				$data['response'] = 'La operacion se ha registroado correctamente.';
+				$data['response'] = 'La operacion se ha registrado correctamente.';
 				if(!$this->session->userdata('user'))
 				{
 					$this->load->view('layouts/top');
 					$this->load->view('ventas/listventas', $data);
 					$this->load->view('layouts/bottom');
 				}
+
 				else
 					$this->load->view('auth/login',$data);
 					
@@ -68,14 +71,20 @@ class Ventas extends CI_Controller
 			{
 				echo "Ha ocurrido un error.";
 				print_r($paramOperacion);	
-			}			
-		}
+			}	
+		
+		/* este else lo comente por que me estaba tirando un error creo que se relaciona con el query que tambien comente arriba
 		else
 		{
 			$datos = array('errors' => 'Esa operacion '.$this->input->post("op_comentario").' ya fue registrada.');
+
 			$this->load->view('register/registerventas',$datos);	
 		}	
+		*/
 	}	
+
+	
+
 	/*
 	* Método para mostrar una lista con todos los usuarios
 	*
@@ -83,7 +92,7 @@ class Ventas extends CI_Controller
 	public function listar()
 	{
 		if(!$this->session->userdata('user')) header('location: '.base_url());
-		$data['usuarios'] = $this->MUsuario->get_users();		
+		$data['operaciones'] = $this->MVentas->get_users();		
 		$this->load->view('layouts/top');
 		$this->load->view('ventas/listventas', $data);
 		$this->load->view('layouts/bottom');	

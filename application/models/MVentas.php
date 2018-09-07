@@ -8,17 +8,22 @@ class MVentas extends CI_Model
 		$this->load->library('encrypt');
 	}
 
-	public function guardar($paramOperacion){
-		if($this->db->insert("operacion",$paramVentas))
+	public function guardarOperacion($paramOperacion){
+		if($this->db->insert("operacion",$paramOperacion))
 			return true;
 		else
 			return false;
 	}
 
+	public function guardarVentas($paramVentas){		
+		$this->db->insert("ventas",$paramVentas);
+		return $this->db->insert_id();
+	}
+
 	
 	public function get_users($vent_codigo = FALSE)
 	{
-		$this->db->join('ventas', 'operacion.op_id = ventas.op_id', 'left');
+		$this->db->join('operacion', 'operacion.op_id = ventas.op_id', 'left');
 	    if ($op_id === FALSE)
 	    {
 	        $query = $this->db->get('operacion');
