@@ -1,5 +1,5 @@
 <!-- main-heading -->
-<h2 class="main-title-w3layouts mb-2 text-center">Operaciones</h2>
+<h2 class="main-title-w3layouts mb-2 text-center">Ventas</h2>
 <!--// main-heading -->
 <?php if (isset($response)) { ?>
 	<div class="col-md-6 offset-md-3 space-bot-md">
@@ -24,6 +24,7 @@
 	            <tr>
 	                <th scope="col">operacion</th>
 	                <th scope="col">fecha</th>
+	                <th scope="col">id del cliente</th>
 	            </tr>
 	        </thead>
 	        <tbody>
@@ -31,6 +32,7 @@
 	                <tr>
 	                    <th scope="row"><?php echo $operacion['op_comentario'] ?></th>
 	                    <td><?php echo $operacion['vent_fecha'] ?></td>
+	                    <td><?php echo $operacion['cli_id'] ?></td>
 
 	                    <td>
 	                    	<div class="btn-group">

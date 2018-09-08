@@ -17,12 +17,6 @@
 </head>
 <body>
 
-<?php  
-$query = "select cli_id from CLiente";
-	       
-/* aqui declare query pero esta mal*/
-?>
-
 	<!-- main-agileits -->
 	<div class="agileits">
 		<h1>Formulario de Registro de Ventas</h1>
@@ -56,13 +50,13 @@ $query = "select cli_id from CLiente";
 				</div>
 				
 				<div class='form-group has-feedback w3ls'>
-					<label class='control-label sr-only' for='cli_id'>Id CLiente</label> 
-
+					<label class='control-label sr-only' >Id CLiente</label> 
 					<select class='form-control' id="cli_id" name="cli_id">
-					<?php while ($arreglo = mysql_fetch_array($query)) { ?>
-					<option value="<?php echo $query->result_array();}?>"></option>
-					   
-					</select> 
+	                <?php foreach($cliente as $client){?> 	
+		            <option value="<?php echo $client['cli_id']?>"><?php echo $client['cli_id']?></option>
+	                <?php } ?>	   
+                    </select>
+
 					<span class='glyphicon glyphicon-ok form-control-feedback'></span>
 				</div>
 				
