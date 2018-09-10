@@ -19,7 +19,7 @@
                             <a href="<?php echo base_url(); ?>index.php/Persona/create">Agregar Nuevo</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>index.php/Persona/list">Lista de Usuarios</a>
+                            <a href="<?php echo base_url(); ?>index.php/Persona/listar">Lista de Usuarios</a>
                         </li>
                     </ul>
                 </li>                                             
