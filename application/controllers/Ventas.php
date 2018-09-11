@@ -28,7 +28,10 @@ class Ventas extends CI_Controller
 	*
 	*/
 	public function create(){
-		$this->load->view('register/registerventas');
+		/* aqui crearemos una variable $data llamada cliente qe nos llamara al Mcliente para obtener idcliente de la tabla cliente y poder meterlo en el formulario de ventas, Despues al cargar la vista en la segunda linea es muy importante colocar la variable despues para llamar a los datos por que no puedes comunicar los datos de otras tablas a los co;asos , si no nunca hars nada(sufri con esto)*/
+		
+		$data['cliente'] = $this->MCliente->get_clientes();
+		$this->load->view('register/registerventas',$data);
 	}
 	/*
 	* Método para el registro de usuarios
@@ -37,7 +40,7 @@ class Ventas extends CI_Controller
 	public function guardar(){		
 		$paramVentas = array(
 			'vent_fecha' => $this->input->post("vent_fecha"),
-			'vent_cliente' =>$this->input->post("vent_cliente")
+			'vent_cliente' =>$this->input->post("cli_id")
 					
 		);
 		$paramOperacion = array(
@@ -73,6 +76,8 @@ class Ventas extends CI_Controller
 					$this->load->view('layouts/top');
 					$this->load->view('ventas/listventas', $data);
 					$this->load->view('layouts/bottom');
+					print_r($data['operaciones']);
+
 				}
 
 				else
@@ -83,7 +88,7 @@ class Ventas extends CI_Controller
 			else
 			{
 				echo "Ha ocurrido un error.";
-				print_r($paramVentas);	
+				print_r($data['operaciones']);
 			}	
 		
 		/* este else lo comente por que me estaba tirando un error creo que se relaciona con el query que tambien comente arriba

@@ -51,9 +51,9 @@
 				
 				<div class='form-group has-feedback w3ls'>
 					<label class='control-label sr-only' >Id CLiente</label> 
-					<select class='form-control' id="vent_cliente" name="vent_cliente">
+					<select class='form-control' id="cli_id" name="cli_id" required="required">
 	                <?php foreach($cliente as $client){?> 	
-		            <option value="<?php echo $client['vent_cliente']?>"><?php echo $client['vent_cliente']?></option>
+		            <option value="<?php echo $client['cli_id']?>"><?php echo $client['cli_id']?></option>
 	                <?php } ?>	   
                     </select>
 
