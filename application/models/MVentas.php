@@ -36,5 +36,10 @@ class MVentas extends CI_Model
 	    return $query->row_array();
 	}
 
+	public function delete($id)
+    {
+    	return $this->db->delete('ventas', array('vent_codigo' => $id));
+    }
+
 }
  ?>

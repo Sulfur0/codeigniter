@@ -18,10 +18,28 @@
                         <li>
                             <a href="<?php echo base_url(); ?>index.php/Persona/create">Agregar Nuevo</a>
                         </li>
-                        <li>
+
+                            <li>
                             <a href="<?php echo base_url(); ?>index.php/Persona/listar">Lista de Usuarios</a>
                         </li>
+
                     </ul>
+                    <ul>
+                              <li>
+                    <a href="#ventasSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-users"></i>
+                        Ventas
+                        <i class="fas fa-angle-down fa-pull-right"></i>
+                    </a>
+                    <ul class="collapse list-unstyled" id="ventasSubmenu">
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/Ventas/create">Registrar Venta</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/Ventas/listarVentas">Historial de Ventas</a>
+                        </li>
+                    </ul>
+                     
                 </li>                                             
             </ul>
         </nav>

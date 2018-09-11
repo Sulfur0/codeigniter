@@ -15,45 +15,30 @@
 	</div>
 <?php } ?>
 <div class="form-body-w3-agile text-center w-lg-50 w-sm-75 w-100 mx-auto mt-5">
-	<form action="<?php echo base_url(); ?>index.php/Persona/update/<?php echo $item["idUsuario"]; ?>" method="post">
+	<form action="<?php echo base_url(); ?>index.php/Ventas/updateVentas/<?php echo $item["vent_codigo"]; ?>" method="post">
 	    <div class="form-group">
-	        <label>Usuario</label>
-	        <input type="text" class="form-control" placeholder="Ingresa Usuario" readonly="" name="nomUsuario" value="<?php echo $item["nomUsuario"]; ?>">
+	        <label>id de Operacion</label>
+	        <input type="text" class="form-control" placeholder="Ingresa el id la operacion" readonly="" name="op_id" value="<?php echo $item["op_id"]; ?>">
 	    </div>
 	    <div class="form-group">
-	        <label>Correo Electrónico</label>
-	        <input type="email" class="form-control" placeholder="Ingresa Correo Electrónico" required="" name="email" value="<?php echo $item["email"]; ?>">
+	        <label>id del cliente</label>
+	        <select type="cli_id" class="form-control" placeholder="elige el id del cliente" required="" name="cli_id" value="<?php echo $item["vent_cliente"]; ?>">
+	        </select>
+
 	    </div>
 	    <div class="form-group">
-	        <label>Contraseña Anterior</label>
-	        <input type="password" class="form-control" placeholder="Ingresa Contraseña" required="" name="viejaclave">
+	        <label>id ciente prueba 2</label>
+	        <select class='form-control' id="cli_id" name="cli_id" required="required">
+	                <?php foreach($cliente as $client){?> 	
+		            <option value="<?php echo $item["vent_cliente"]; ?>"></option>
+	                <?php } ?>	   
+                    </select>
 	    </div>
 	    <div class="form-group">
-	        <label>Nueva Contraseña</label>
-	        <input type="password" class="form-control" placeholder="Ingresa Contraseña" required="" name="clave">
+	        <label>comentario de operacion</label>
+	        <input type="text" class="form-control" placeholder="Ingresa el comentario" required="" name="op_comentario" value="<?php echo $item["op_comentario"]; ?>">
 	    </div>
-	    <hr>
-	    <div class="form-group">
-	        <label>Nombre</label>
-	        <input type="text" class="form-control" placeholder="Ingresa Nombre" required="" name="nombre" value="<?php echo $item["nombre"]; ?>">
-	    </div>
-	    <div class="form-group">
-	        <label>Apellido Paterno</label>
-	        <input type="text" class="form-control" placeholder="Ingresa Apellido Paterno" required="" name="appaterno" value="<?php echo $item["appaterno"]; ?>">
-	    </div>
-	    <div class="form-group">
-	        <label>Apellido Materno</label>
-	        <input type="text" class="form-control" placeholder="Ingresa Apellido Materno" required="" name="apmaterno" value="<?php echo $item["apmaterno"]; ?>">
-	    </div>
-	    <div class="form-group">
-	        <label>Documento nacional de identidad</label>
-	        <input type="text" class="form-control" placeholder="Ingresa Documento Nacional de Identidad" required="" name="dni" value="<?php echo $item["dni"]; ?>">
-	    </div>
-	    <div class="form-group">
-	        <label>Dirección</label>
-	        <input type="text" class="form-control" placeholder="Ingresa Dirección" required="" name="direccion" value="<?php echo $item["direccion"]; ?>">
-	    </div>
-	    <input type="hidden" name="idPersona" name="idPersona" value="<?php echo $item["idPersona"]; ?>">
-	    <button type="submit" class="btn btn-primary error-w3l-btn mt-sm-5 mt-3 px-4">Actualizar</button>
+	    <input type="hidden" name="vent_codigo" name="vent_codigo" value="<?php echo $item["vent_codigo"]; ?>">
+	    <button type="submit" class="btn btn-primary error-w3l-btn mt-sm-5 mt-3 px-4">Actualizar Venta</button>
 	</form>
 </div>

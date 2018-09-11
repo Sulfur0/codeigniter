@@ -22,22 +22,25 @@
 		<table class="table">
 	        <thead class="thead-dark">
 	            <tr>
-	                <th scope="col">operacion</th>
+	                <th scope="col">id de operacion</th>
 	                <th scope="col">fecha</th>
 	                <th scope="col">id del cliente</th>
+	                <th scope="col">comentario</th>
+	                <th scope="col">Acciones</th>
 	            </tr>
 	        </thead>
 	        <tbody>
 	        	<?php foreach ($operaciones as $operacion): ?>
 	                <tr>
-	                    <th scope="row"><?php echo $operacion['op_comentario'] ?></th>
+	                    <th scope="row"><?php echo $operacion['op_id'] ?></th>
 	                    <td><?php echo $operacion['vent_fecha'] ?></td>
 	                    <td><?php echo $operacion['vent_cliente'] ?></td>
+	                    <td><?php echo $operacion['op_comentario'] ?></td>
 
 	                    <td>
 	                    	<div class="btn-group">
-	                    		<a href="<?php echo base_url(); ?>index.php/Ventas/editventas/<?php echo $operacion['vent_codigo'];?>" class="btn btn-sm btn-warning">Editar</a>
-	                    		<a href="<?php echo base_url(); ?>index.php/Ventas/delete/<?php echo $operacion['vent_codigo'];?>" class="btn btn-sm btn-danger">Eliminar</a>
+	                    		<a href="<?php echo base_url(); ?>index.php/Ventas/editVentas/<?php echo $operacion['vent_codigo'];?>" class="btn btn-sm btn-warning">Editar</a>
+	                    		<a href="<?php echo base_url(); ?>index.php/Ventas/deleteVentas/<?php echo $operacion['vent_codigo'];?>" class="btn btn-sm btn-danger">Eliminar</a>
 	                    	</div>
 	                    </td>
 	                </tr>

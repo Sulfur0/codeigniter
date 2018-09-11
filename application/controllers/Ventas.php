@@ -1,6 +1,6 @@
 <?php
 /**
- * Controlador de persona necesario para CRUD de atributos a usuarios.
+ * Controlador de Ventas necesario para CRUD de atributos a Ventas y operaciones.
  */
 class Ventas extends CI_Controller
 {
@@ -119,14 +119,14 @@ class Ventas extends CI_Controller
 	}
 	/*
 	* @Description: Método para mostrar el formulario de edición de usuarios
-	* @Params $id -> id del usuario a modificar
+	* @Params $id -> id de la venta a modificar
 	* @return Response
 	*/
-	public function edit($id)
+	public function editVentas($id)
 	{
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 		
-		$item = $this->MUsuario->get_users($id);
+		$item = $this->MVentas->get_ventas($id);
 
        	$this->load->view('layouts/top');
        	$this->load->view('ventas/editventas',array('item'=>$item));
@@ -136,7 +136,7 @@ class Ventas extends CI_Controller
 	* Método para guardar la edición de los usuarios
 	*
 	*/
-	public function update($id)
+	public function updateVentas($id)
 	{
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 
@@ -168,18 +168,18 @@ class Ventas extends CI_Controller
 	* Metodo para eliminar un usuario
 	*
 	*/
-	public function delete($id)
+	public function deleteVentas($id)
 	{
 		/*
 		se puede eliminar un usuario pero deberia poder seguir existiendo como persona bajo la base de datos
 		*/
 		if(!$this->session->userdata('user')) header('location: '.base_url());
-		$item = $this->MUsuario->delete($id);
-		$data['response'] = 'Usuario eliminado correctamente.';
-		$data['usuarios'] = $this->MUsuario->get_users();
+		$item = $this->MVentas->delete($id);
+		$data['response'] = 'La venta ha sido eliminada';
+		$data['operaciones'] = $this->MVentas->get_ventas();
 		
 		$this->load->view('layouts/top');
-		$this->load->view('persona/list', $data);
+		$this->load->view('ventas/listventas', $data);
 		$this->load->view('layouts/bottom');
 	}
 }
