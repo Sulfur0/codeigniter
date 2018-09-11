@@ -37,7 +37,7 @@ class Ventas extends CI_Controller
 	public function guardar(){		
 		$paramVentas = array(
 			'vent_fecha' => $this->input->post("vent_fecha"),
-			'cli_id' =>$this->input->post("cli_id")
+			'vent_cliente' =>$this->input->post("vent_cliente")
 					
 		);
 		$paramOperacion = array(

@@ -32,7 +32,7 @@
 	                <tr>
 	                    <th scope="row"><?php echo $operacion['op_comentario'] ?></th>
 	                    <td><?php echo $operacion['vent_fecha'] ?></td>
-	                    <td><?php echo $operacion['cli_id'] ?></td>
+	                    <td><?php echo $operacion['vent_cliente'] ?></td>
 
 	                    <td>
 	                    	<div class="btn-group">
