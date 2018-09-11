@@ -26,11 +26,12 @@
 	        </select>
 
 	    </div>
+
 	    <div class="form-group">
 	        <label>id ciente prueba 2</label>
 	        <select class='form-control' id="cli_id" name="cli_id" required="required">
 	                <?php foreach($cliente as $client){?> 	
-		            <option value="<?php echo $item["vent_cliente"]; ?>"></option>
+		            <option value="<?php echo $item["cli_id"]; ?>"></option>
 	                <?php } ?>	   
                     </select>
 	    </div>

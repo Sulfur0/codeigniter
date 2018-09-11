@@ -127,6 +127,8 @@ class Ventas extends CI_Controller
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 		
 		$item = $this->MVentas->get_ventas($id);
+		$data['cliente'] = $this->MCliente->get_clientes();	
+
 
        	$this->load->view('layouts/top');
        	$this->load->view('ventas/editventas',array('item'=>$item));
@@ -141,26 +143,25 @@ class Ventas extends CI_Controller
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 
 		$query = $this->db->get_where(
-			'usuario', array(
-				'nomUsuario' => $this->input->post('nomUsuario'), 
-				'clave' => sha1($this->input->post('viejaclave'))
-			)
+			'ventas', array(
+				'vent_codigo' => $this->input->post('vent_codigo'))
+			
 		);
 		if($query->row_array())
 		{
-			$this->MUsuario->update($id);
-			$data['usuarios'] = $this->MUsuario->get_users();
-			$data['response'] = 'El usuario se ha actualizado correctamente.';
+			$this->MVentas->update($id);
+			$data['operaciones'] = $this->MVentas->get_ventas();
+			$data['response'] = 'La venta se actualizo correctamente.';
 			$this->load->view('layouts/top');
-	       	$this->load->view('persona/list', $data);
+	       	$this->load->view('ventas/listventas', $data);
 	       	$this->load->view('layouts/bottom');
 		}
 		else
 		{
-			$data['item'] = $this->MUsuario->get_users($id);
+			$data['item'] = $this->MVentas->get_ventas($id);
 			$data['error'] = 'La contraseña anterior no coincide.';
 			$this->load->view('layouts/top');
-	       	$this->load->view('persona/edit',$data);
+	       	$this->load->view('ventas/editventas',$data);
 	       	$this->load->view('layouts/bottom');
 		}
 	}
