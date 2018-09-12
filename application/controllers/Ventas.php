@@ -126,12 +126,14 @@ class Ventas extends CI_Controller
 	{
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 		
-		$item = $this->MVentas->get_ventas($id);
-
+		$data["ventas"] = $this->MVentas->get_ventas($id);
+		$data["clientes"] = $this->MCliente->get_clientes();
+		
        	$this->load->view('layouts/top');
-       	$this->load->view('ventas/editventas',array('item'=>$item));
+       	$this->load->view('ventas/editventas',$data);
        	$this->load->view('layouts/bottom');
 
+		//Array ( [vent_codigo] => 1 [vent_cliente] => 1 [op_id] => 1 [vent_fecha] => 2018-09-13 [op_comentario] => operacion [cli_id] => 1 [idPersona] => 11 )
 	}
 	/*
 	* Método para guardar la edición de los usuarios

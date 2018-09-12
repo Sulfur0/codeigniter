@@ -15,22 +15,27 @@
 	</div>
 <?php } ?>
 <div class="form-body-w3-agile text-center w-lg-50 w-sm-75 w-100 mx-auto mt-5">
-	<form action="<?php echo base_url(); ?>index.php/Ventas/updateVentas/<?php echo $item["vent_codigo"]; ?>" method="post">
+	<form action="<?php echo base_url(); ?>index.php/Ventas/updateVentas/<?php echo $ventas["vent_codigo"]; ?>" method="post">
 	    
 
 	    <div class="form-group">
 	        <label>id cliente</label>
+	        
 	        <select class='form-control' id="cli_id" name="cli_id" required="required">
-	                <?php foreach($item as $operacion){?> 	
-		            <option value="<?php echo $operacion["cli_id"]; ?>"></option>
-	                <?php } ?>	   
-                    </select>
+	            <?php foreach($clientes as $cliente){ ?>
+	               	<?php if($cliente["cli_id"] == $ventas["cli_id"]){?>               	
+		            	<option selected="selected" value="<?php echo $cliente["cli_id"]; ?>"><?php echo $cliente["cli_id"]; ?></option>
+		            <?php } else { ?>
+						<option value="<?php echo $cliente["cli_id"]; ?>"><?php echo $cliente["cli_id"]; ?></option>
+					<?php } ?>
+	            <?php } ?>	   
+            </select>
 	    </div>
 	    <div class="form-group">
 	        <label>comentario de operacion</label>
-	        <input type="text" class="form-control" placeholder="Ingresa el comentario" required="" name="op_comentario" value="<?php echo $item["op_comentario"]; ?>">
+	        <input type="text" class="form-control" placeholder="Ingresa el comentario" required="" name="op_comentario" value="<?php echo $ventas["op_comentario"]; ?>">
 	    </div>
-	    <input type="hidden" name="vent_codigo" name="vent_codigo" value="<?php echo $item["vent_codigo"]; ?>">
+	    <input type="hidden" name="vent_codigo" name="vent_codigo" value="<?php echo $ventas["vent_codigo"]; ?>">
 	    <button type="submit" class="btn btn-primary error-w3l-btn mt-sm-5 mt-3 px-4">Actualizar Venta</button>
 	</form>
 </div>
