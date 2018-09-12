@@ -127,12 +127,11 @@ class Ventas extends CI_Controller
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 		
 		$item = $this->MVentas->get_ventas($id);
-		$data['cliente'] = $this->MCliente->get_clientes();	
-
 
        	$this->load->view('layouts/top');
        	$this->load->view('ventas/editventas',array('item'=>$item));
        	$this->load->view('layouts/bottom');
+
 	}
 	/*
 	* Método para guardar la edición de los usuarios
@@ -159,7 +158,7 @@ class Ventas extends CI_Controller
 		else
 		{
 			$data['item'] = $this->MVentas->get_ventas($id);
-			$data['error'] = 'La contraseña anterior no coincide.';
+			$data['error'] = 'El codigo de ventas no coincide';
 			$this->load->view('layouts/top');
 	       	$this->load->view('ventas/editventas',$data);
 	       	$this->load->view('layouts/bottom');

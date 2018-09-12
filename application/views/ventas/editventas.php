@@ -16,22 +16,13 @@
 <?php } ?>
 <div class="form-body-w3-agile text-center w-lg-50 w-sm-75 w-100 mx-auto mt-5">
 	<form action="<?php echo base_url(); ?>index.php/Ventas/updateVentas/<?php echo $item["vent_codigo"]; ?>" method="post">
-	    <div class="form-group">
-	        <label>id de Operacion</label>
-	        <input type="text" class="form-control" placeholder="Ingresa el id la operacion" readonly="" name="op_id" value="<?php echo $item["op_id"]; ?>">
-	    </div>
-	    <div class="form-group">
-	        <label>id del cliente</label>
-	        <select type="cli_id" class="form-control" placeholder="elige el id del cliente" required="" name="cli_id" value="<?php echo $item["vent_cliente"]; ?>">
-	        </select>
-
-	    </div>
+	    
 
 	    <div class="form-group">
-	        <label>id ciente prueba 2</label>
+	        <label>id cliente</label>
 	        <select class='form-control' id="cli_id" name="cli_id" required="required">
-	                <?php foreach($cliente as $client){?> 	
-		            <option value="<?php echo $item["cli_id"]; ?>"></option>
+	                <?php foreach($item as $operacion){?> 	
+		            <option value="<?php echo $operacion["cli_id"]; ?>"></option>
 	                <?php } ?>	   
                     </select>
 	    </div>

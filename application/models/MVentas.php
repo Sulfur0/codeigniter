@@ -25,6 +25,7 @@ class MVentas extends CI_Model
 	{
 		/* aqui llamas con el join a la tabla operacion, en donde op_id es igual al otro op_id que esta en la tabla vntas */
 		$this->db->join('operacion', 'operacion.op_id = ventas.op_id', 'left');
+		$this->db->join('cliente','cliente.cli_id = ventas.vent_cliente', 'left');
 
 		/* luego aqui abajo en los querys llamaremos a la tabla ventas, para que se traiga el array de ella y los datos del op_id de la tabla operacion*/
 	    if ($vent_codigo=== FALSE)

@@ -27,7 +27,7 @@
                     <ul>
                               <li>
                     <a href="#ventasSubmenu" data-toggle="collapse" aria-expanded="false">
-                        <i class="fas fa-users"></i>
+                        <i class="fas fa-cart-plus"></i>
                         Ventas
                         <i class="fas fa-angle-down fa-pull-right"></i>
                     </a>
