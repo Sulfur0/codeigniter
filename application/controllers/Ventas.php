@@ -159,7 +159,7 @@ class Ventas extends CI_Controller
 		}
 		else
 		{
-			$data['item'] = $this->MVentas->get_ventas($id);
+			$data['operaciones'] = $this->MVentas->get_ventas($id);
 			$data['error'] = 'El codigo de ventas no coincide';
 			$this->load->view('layouts/top');
 	       	$this->load->view('ventas/editventas',$data);

@@ -40,22 +40,21 @@ class MVentas extends CI_Model
 		public function update($id) 
     {
     	
-    	$data1=array(    		
-            'usr_fec_actualizacion' => date("Y-m-d"), 
+    	
+        $data1=array(
+        	'vent_cliente' => $this->input->post('cli_id'),            
+            
+           
         );
         $data2=array(
-        	'email' => $this->input->post('email'),            
-            'nombre' => $this->input->post('nombre'),
-            'appaterno' => $this->input->post('appaterno'),
-            'apmaterno' => $this->input->post('apmaterno'),
-            'dni' => $this->input->post('dni'),
-            'direccion' => $this->input->post('direccion'),
+        	'op_comentario' => $this->input->post('op_comentario'),
+
         );
-        $this->db->where('idUsuario', $id);
+        $this->db->where('vent_codigo', $id);
 		$this->db->update('ventas', $data1);
 
-		$this->db->where('idPersona', $this->input->post('idPersona'));		
-       	return $this->db->update('ventas', $data2);
+		$this->db->where('op_comentario',$this->input->post('op_comentario'));		
+       	return $this->db->update('operacion', $data2);
     }
 
 	public function delete($id)
