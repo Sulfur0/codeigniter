@@ -29,19 +29,14 @@ class Items extends CI_Controller
 		$this->load->view('items/registro');
 	}
     public function guardar(){		
-		$paramUsuario = array(
-			'nomUsuario' => $this->input->post("nomUsuario"),
-			'clave' => sha1($this->input->post("clave")),
-			'privilegio' => 'user',
-			'usr_fec_creacion' => date('Y-m-d'),
-			'usr_fec_actualizacion' => date('Y-m-d'),
-		);  
+		  
         $paramItems = array(
 			'itm_nombre' => $this->input->post("itm_nombre"), 
 			'itm_unidad' => $this->input->post("itm_unidad"), 
 			'itm_precio_compra' => $this->input->post("itm_precio_compra"),
-			'itm_creado_por' => $this->input->post("itm_creado_por"),
+			'itm_creado_por' => $this->session->userdata('user'),
 			'itm_fecha_creacion' => $this->input->post("itm_fecha_creacion "),
+			'itm_fecha_actualizacion' => $this->input->post("itm_fecha_actualizacion",
 			'itm_fecha_actualizacion' => $this->input->post("itm_fecha_actualizacion")
 		);
 
