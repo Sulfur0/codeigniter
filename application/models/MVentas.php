@@ -53,7 +53,7 @@ class MVentas extends CI_Model
         $this->db->where('vent_codigo', $id);
 		$this->db->update('ventas', $data1);
 
-		$this->db->where('op_comentario',$this->input->post('op_comentario'));		
+		$this->db->where('op_id',$this->input->post('op_id'));		
        	return $this->db->update('operacion', $data2);
     }
 

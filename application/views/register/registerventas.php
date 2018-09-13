@@ -44,12 +44,14 @@
 				
 				<hr>
 				<div class='form-group has-feedback w3ls'>
-					<label class='control-label sr-only' for='op_comentario'>comentario de operacion</label> 
+				<label class="'form-control'">comentario</label>
+					<label class='control-label sr-only' for='op_comentario'>comentario</label> 
 					<input class='form-control' id='op_comentario' name='op_comentario' placeholder='comentario de la operacion' type='text'>
 					<span class='glyphicon glyphicon-ok form-control-feedback'></span>
 				</div>
 				
 				<div class='form-group has-feedback w3ls'>
+				<label class="'form-control'">id del cliente </label>
 					<label class='control-label sr-only' >Id CLiente</label> 
 					<select class='form-control' id="cli_id" name="cli_id" required="required">
 	                <?php foreach($cliente as $client){?> 	
