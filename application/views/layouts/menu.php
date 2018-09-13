@@ -22,6 +22,21 @@
                             <a href="<?php echo base_url(); ?>index.php/Persona/listar">Lista de Usuarios</a>
                         </li>
                     </ul>
+                </li>
+		<li>
+                    <a href="#clientesSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                        Clientes
+                        <i class="fas fa-angle-down fa-pull-right"></i>
+                    </a>
+                    <ul class="collapse list-unstyled" id="clientesSubmenu">
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/Cliente/create">Agregar Nuevo</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/Cliente/index">Lista de Clientes</a>
+                        </li>
+                    </ul>
                 </li>                                             
             </ul>
         </nav>
