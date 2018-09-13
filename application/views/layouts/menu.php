@@ -22,6 +22,21 @@
                             <a href="<?php echo base_url(); ?>index.php/Persona/listar">Lista de Usuarios</a>
                         </li>
                     </ul>
-                </li>                                             
+                </li>
+                <li>
+                    <a href="#itemsSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-tasks"></i>
+                        Items
+                        <i class="fas fa-angle-down fa-pull-right"></i>
+                    </a>
+                    <ul class="collapse list-unstyled" id="itemsSubmenu">
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/Items/create">Agregar Nuevo</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>index.php/Items/listar">Lista de items</a>
+                        </li>
+                    </ul>
+                </li> 
             </ul>
         </nav>
