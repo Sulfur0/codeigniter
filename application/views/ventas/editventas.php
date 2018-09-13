@@ -36,6 +36,7 @@
 	        <input type="text" class="form-control" placeholder="Ingresa el comentario" required="" name="op_comentario" value="<?php echo $ventas["op_comentario"]; ?>">
 	    </div>
 	    <input type="hidden" name="vent_codigo" name="vent_codigo" value="<?php echo $ventas["vent_codigo"]; ?>">
+	    <input type="hidden" name="op_id" name="op_id" value="<?php echo $ventas["op_id"]; ?>">
 	    <button type="submit" class="btn btn-primary error-w3l-btn mt-sm-5 mt-3 px-4">Actualizar Venta</button>
 	</form>
 </div>
