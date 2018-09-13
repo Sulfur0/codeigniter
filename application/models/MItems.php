@@ -17,18 +17,18 @@ class MItems extends CI_Model
 	}
 
 	
-	public function get_users($itm_creado_por = FALSE)
+	public function get_items($itm_creado_por = FALSE)
 	{
-		$this->db->join('usuario', 'items.itm_creado_por= usuario.idUsuario', 'left');
+		$this->db->join('usuario', 'items.itm_codigo= usuario.idUsuario', 'left');
 	    if ($itm_creado_por === FALSE)
 	    {
 	        $query = $this->db->get('items');
 	        return $query->result_array();
 	    }
-		$query = $this->db->get_where('items', array('items.itm_creado_por' => $itm_creado_por));
+		$query = $this->db->get_where('items', array('items.itm_codigo' => $itm_codigo));
 	    return $query->row_array();
 	}
-
+/*
 	public function update($id) 
     {
     	
@@ -54,6 +54,6 @@ class MItems extends CI_Model
     public function delete($id)
     {
     	return $this->db->delete('usuario', array('idUsuario' => $id));
-    }
+    }*/
 }
  ?>
