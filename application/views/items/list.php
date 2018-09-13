@@ -34,16 +34,17 @@
 	        <tbody>
 	        	<?php foreach ($items as $items): ?>
 	                <tr>
-	                    <th scope="row"><?php echo $items['itm_creado_por'] ?></th>
-	                    <td><?php echo $items['nomUsuario'] ?></td>
+	                    <th scope="row"><?php echo $items['itm_codigo'] ?></th>
+	                    <td><?php echo $items['itm_nombre'] ?></td>
 	                    <td><?php echo $items['itm_unidad'] ?></td>
 						<td><?php echo $items['itm_precio_compra'] ?></td>
+						<td><?php echo $items['nomUsuario'] ?></td>
 	                    <td><?php echo $items['itm_fecha_creacion'] ?></td>
 	                    <td><?php echo $items['itm_fecha_actualizacion'] ?></td>
 	                    <td>
 	                    	<div class="btn-group">
-	                    		<a href="<?php echo base_url(); ?>index.php/Items/edit/<?php echo $items['idUsuario'];?>" class="btn btn-sm btn-warning">Editar</a>
-	                    		<a href="<?php echo base_url(); ?>index.php/Items/delete/<?php echo $items['idUsuario'];?>" class="btn btn-sm btn-danger">Eliminar</a>
+	                    		<a href="<?php echo base_url(); ?>index.php/Items/edit/<?php echo $items['itm_codigo'];?>" class="btn btn-sm btn-warning">Editar</a>
+	                    		<a href="<?php echo base_url(); ?>index.php/Items/delete/<?php echo $items['itm_codigo'];?>" class="btn btn-sm btn-danger">Eliminar</a>
 	                    	</div>
 	                    </td>
 	                </tr>

@@ -49,11 +49,11 @@ class MItems extends CI_Model
 
 		$this->db->where('idPersona', $this->input->post('idPersona'));		
        	return $this->db->update('persona', $data2);
-    }
+    }*/
 
     public function delete($id)
     {
-    	return $this->db->delete('usuario', array('idUsuario' => $id));
-    }*/
+    	return $this->db->delete('items', array('itm_codigo' => $id));
+    }
 }
  ?>
