@@ -29,6 +29,7 @@
 					<th scope="col">Creado por</th>
 	                <th scope="col">Fec. Creación</th>
 	                <th scope="col">Fec. Actualización</th>
+					<th scope="col">Acciones</th>
 	            </tr>
 	        </thead>
 	        <tbody>

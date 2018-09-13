@@ -54,7 +54,7 @@
 					<input class='form-control' id='itm_creado_por' name='itm_creado_por' placeholder='creado por' type='text'><span class='glyphicon glyphicon-ok form-control-feedback'></span>
 				</div>
 				<div class='form-group has-feedback w3ls'>
-					<label class='control-label sr-only' for='itm_fecha_creacion'></label>Fecha de creación
+					<label class='control-label sr-only' for='itm_fecha_creacion'>Fecha de creación</label>Fecha de creación
 					<input class='form-control' id='itm_fecha_creacion' name='itm_fecha_creacion' placeholder='Fecha de creación' type='date'>
 					<span class='glyphicon glyphicon-ok form-control-feedback'></span>
 				</div>

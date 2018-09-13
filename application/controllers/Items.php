@@ -47,7 +47,7 @@ class Items extends CI_Controller
 			{				
 				$data['items'] = $this->MItems->get_items();
 				$data['response'] = 'Se ha registrado el items correctamente.';
-				if(!$this->session->userdata('user'))
+				if($this->session->userdata('user'))
 				{
 					$this->load->view('layouts/top');
 					$this->load->view('items/list', $data);
@@ -88,11 +88,11 @@ class Items extends CI_Controller
 	* @Params $id -> id del usuario a modificar
 	* @return Response
 	*/
-	public function edit($id)
+	public function edit($itm_codigo)
 	{
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 		
-		$item = $this->MItems->get_items($id);
+		$item = $this->MItems->get_items($itm_codigo);
 
        	$this->load->view('layouts/top');
        	$this->load->view('items/edit',array('item'=>$item));
@@ -101,35 +101,36 @@ class Items extends CI_Controller
 	/**
 	* Método para guardar la edición de los usuarios
 	**/
-	/*public function update($id)
+	public function update($id)
 	{
 		if(!$this->session->userdata('user')) header('location: '.base_url());
 
-		$query = $this->db->get_where(
-			'usuario', array(
-				'nomUsuario' => $this->input->post('nomUsuario'), 
-				'clave' => sha1($this->input->post('viejaclave'))
+		/*$query = $this->db->get_where(
+			'items', array(
+				'itm_codigo' => $this->input->post('itm_codigo'), 
+				'itm_nombre' => $this->input->post('itm_nombre')
 			)
-		);
+		);*/
+
 		if($query->row_array())
 		{
-			$this->MUsuario->update($id);
-			$data['usuarios'] = $this->MUsuario->get_users();
-			$data['response'] = 'El usuario se ha actualizado correctamente.';
+			$this->MItems->update($id);
+			$data['items'] = $this->MItems->get_items();
+			$data['response'] = 'El items se ha actualizado correctamente.';
 			$this->load->view('layouts/top');
-	       	$this->load->view('persona/list', $data);
+	       	$this->load->view('items/list', $data);
 	       	$this->load->view('layouts/bottom');
 		}
 		else
 		{
-			$data['item'] = $this->MUsuario->get_users($id);
-			$data['error'] = 'La contraseña anterior no coincide.';
+			$data['item'] = $this->MItems->get_items($id);
+			$data['error'] = 'Error al actualizar datos.';
 			$this->load->view('layouts/top');
-	       	$this->load->view('persona/edit',$data);
+	       	$this->load->view('items/edit',$data);
 	       	$this->load->view('layouts/bottom');
 		}
 	}
-	*/
+	
 	/**
 	* Metodo para eliminar un usuario
 	**/
