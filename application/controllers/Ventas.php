@@ -81,7 +81,7 @@ class Ventas extends CI_Controller
 				}
 
 				else
-					$this->load->view('auth/login',$data);
+					$this->load->view('ventas/listventas',$data);
 					
 						
 			}
