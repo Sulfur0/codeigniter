@@ -63,25 +63,18 @@ class Ventas extends CI_Controller
 		 /* en la primera line siguiente declaramos la clave foranea (op_id)entre ambas tablas, primero en donde es la llave primaria que es en la tabla operacion, por eso guardamos en parmoperacion y llamamos a la respectiva funcion del MVentas*/
 
 		 	/* enla segunda linea ahora declaramos que en paramventas ese id operacion es igual a la variable declarada en la linea anterior, para que ahora tambien se nos guarde en la otra tabla*/
+		
 
-
-			$op_id = $this->MVentas->guardarOperacion($paramOperacion);
+		$op_id = $this->MVentas->guardarOperacion($paramOperacion);
 			$paramVentas["op_id"] = $op_id;
 			if($this->MVentas->guardarVentas($paramVentas))
 			{				
 				$data['operaciones'] = $this->MVentas->get_ventas();
 				$data['response'] = 'La operacion se ha registrado correctamente.';
-				if(!$this->session->userdata('user'))
-				{
-					$this->load->view('layouts/top');
-					$this->load->view('ventas/listventas', $data);
-					$this->load->view('layouts/bottom');
-					print_r($data['operaciones']);
-
-				}
-
-				else
-					$this->load->view('ventas/listventas',$data);
+				$this->load->view('layouts/top');
+				$this->load->view('ventas/listventas', $data);
+				$this->load->view('layouts/bottom');
+				
 					
 						
 			}
@@ -89,8 +82,7 @@ class Ventas extends CI_Controller
 			{
 				echo "Ha ocurrido un error.";
 				print_r($data['operaciones']);
-			}	
-		
+			}
 		/* este else lo comente por que me estaba tirando un error creo que se relaciona con el query que tambien comente arriba
 		else
 		{
